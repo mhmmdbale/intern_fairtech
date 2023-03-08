@@ -118,7 +118,7 @@ environments:
             dialect: org.hibernate.dialect.MySQL8Dialect
             username: root
             password: root
-            url: jdbc:mysql://localhost:3306/intern_fairtech?useUnicode=true&useSSL=false&autoReconnect=true
+            url: jdbc:mysql://localhost:3306/intern_test?useUnicode=true&useSSL=false&autoReconnect=true
     test:
         dataSource:
             dbCreate: update

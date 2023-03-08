@@ -10,6 +10,7 @@ class UrlMappings {
         }
 
         "/registerUser/"(controller: "user", action: "registerUser")
+        "/user/add/"(controller: "user", action: "addUser")
 
         "/"(view:"/index")
         "500"(view:'/error')

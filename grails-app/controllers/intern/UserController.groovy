@@ -8,10 +8,22 @@ class UserController {
 
     def userService
 
-    def index() { }
+    def index() {}
 
-    def registerUser(){
+    def registerUser() {
         List<Role> roles = userService.getRole()
         render(view: '/authview/register', model: [roles: roles])
+    }
+
+    def findUser(long id){
+        def result = userService.getData(id)
+
+        render result as JSON
+    }
+
+    def addUser() {
+        def result = userService.addData(params)
+
+        render result as JSON
     }
 }
