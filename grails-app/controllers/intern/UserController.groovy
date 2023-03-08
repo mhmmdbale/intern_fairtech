@@ -8,7 +8,9 @@ class UserController {
 
     def userService
 
-    def index() {}
+    def index() {
+        render('hello')
+    }
 
     def registerUser() {
         List<Role> roles = userService.getRole()
