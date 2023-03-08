@@ -12,7 +12,6 @@ class UserController {
 
     def registerUser(){
         List<Role> roles = userService.getRole()
-//        render(view: '/auth/register', model: [roles: roles])
-        render('hello')
+        render(view: '/authview/register', model: [roles: roles])
     }
 }
