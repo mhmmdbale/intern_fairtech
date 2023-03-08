@@ -4,7 +4,7 @@ body {
 }
 
 a {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .card {
@@ -22,21 +22,21 @@ a {
 }
 
 .logo-box a.logo-text {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .logo-box a.logo-text:hover {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .logo-box a#sidebar-state,
 .logo-box a#sidebar-close {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .logo-box a#sidebar-state:hover,
 .logo-box a#sidebar-close:hover {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .accordion-menu > li > a {
@@ -51,12 +51,12 @@ a {
 
 .dark-theme .accordion-menu > li > a:hover,
 .dark-theme .accordion-menu > li.active-page > a {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .accordion-menu > li.open > a,
 .dark-theme .accordion-menu > li.open > a {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .accordion-menu li.sidebar-title {
@@ -82,7 +82,7 @@ a {
 .dark-theme .compact-sidebar .accordion-menu li ul li a:hover,
 .dark-theme .compact-sidebar .accordion-menu li ul li a.active,
 .dropdown-menu a.dropdown-item:hover {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .compact-sidebar .page-sidebar {
@@ -115,7 +115,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background: #4FAA53;
+    background: #2877ed;
 }
 
 .btn.btn-primary {
@@ -141,8 +141,8 @@ a {
 }
 
 .btn.btn-outline-primary {
-    border: 1px solid #4FAA53;
-    color: #4FAA53;
+    border: 1px solid #2877ed;
+    color: #2877ed;
 }
 
 .btn-outline-primary:before {
@@ -222,7 +222,7 @@ a {
 
 .badge.badge-primary {
     color: #fff;
-    background: #4FAA53;
+    background: #2877ed;
 }
 
 .badge.badge-light,
@@ -244,25 +244,25 @@ a {
 
 .progress .progress-bar,
 .list-group-item.active {
-    background: #4FAA53;
+    background: #2877ed;
 }
 
 .pagination li.active a {
-    background: #4FAA53!important;
+    background: #2877ed!important;
     color: #fff!important;
-    border-color: #4FAA53!important;
+    border-color: #2877ed!important;
 }
 
 .b-primary {
-    border-color: #4FAA53;
+    border-color: #2877ed;
 }
 
 .bg-primary {
-    background-color: #4FAA53!important;
+    background-color: #2877ed!important;
 }
 
 .text-primary {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 
@@ -270,7 +270,7 @@ a {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background: #e6fce7;
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
@@ -280,7 +280,7 @@ a {
 }
 
 .select2-selection__choice {
-    background: #4FAA53!important;
+    background: #2877ed!important;
     color: #fff!important;
 }
 
@@ -293,8 +293,8 @@ a {
 }
 
 .custom-control-input:checked~.custom-control-label::before {
-    border-color: #4FAA53;
-    background-color: #4FAA53;
+    border-color: #2877ed;
+    background-color: #2877ed;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -328,7 +328,7 @@ a {
 }
   
 .custom-range::-webkit-slider-thumb {
-    background-color: #4FAA53;
+    background-color: #2877ed;
 }
   
 .custom-range::-webkit-slider-thumb:active {
@@ -336,7 +336,7 @@ a {
 }
   
 .custom-range::-moz-range-thumb {
-    background-color: #4FAA53;
+    background-color: #2877ed;
 }
   
 .custom-range::-moz-range-thumb:active {
@@ -344,7 +344,7 @@ a {
 }
   
 .custom-range::-ms-thumb {
-    background-color: #4FAA53;
+    background-color: #2877ed;
 }
 
 .custom-range::-ms-thumb:active {
@@ -384,7 +384,7 @@ a {
 .mailbox-contacts li a:hover,
 .dark-theme .mailbox-menu li a.active,
 .dark-theme .mailbox-contacts li a:hover {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .mailbox-menu li a:hover,
@@ -402,7 +402,7 @@ a {
 .file-manager-menu ul li a.active,
 .file-manager-menu ul li a:hover,
 .file-options > a:hover {
-    color: #4FAA53;
+    color: #2877ed;
 }
 
 .fc-toolbar .btn.btn-primary {
@@ -445,11 +445,11 @@ a {
 .fc.fc-bootstrap a,
 .dark-theme .fc.fc-bootstrap a {
     color: #fff!important;
-    background: #4FAA53!important;
+    background: #2877ed!important;
 }
 
 .fc .fc-today {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .dark-theme .fc-toolbar .btn.btn-primary {
@@ -501,7 +501,7 @@ a {
 
 .todo-menu li.active a,
 .dark-theme .todo-menu li.active a {
-    color: #4FAA53!important;
+    color: #2877ed!important;
 }
 
 .todo-menu li.active a,
@@ -510,7 +510,7 @@ a {
 }
 
 .page-header .navbar-search #nav-search:focus {
-    border-color: #4FAA53;
+    border-color: #2877ed;
 }
 
 

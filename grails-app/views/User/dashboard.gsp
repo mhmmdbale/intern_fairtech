@@ -9,7 +9,7 @@
 <%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
-    <title></title>
+    <title>Dashboard</title>
 </head>
 
 <body>
