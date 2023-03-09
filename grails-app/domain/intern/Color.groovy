@@ -6,6 +6,6 @@ class Color {
     static hasMany = [productColors: ProductColor]
     static constraints = {
         code blank: false, nullable: false, unique: true
-        name blank: false, nullable: false
+        name blank: false, nullable: false, unique: true
     }
 }

@@ -14,6 +14,14 @@ class ColorController {
     }
 
     def saveColor(){
+        def color = new Color(params)
+        if (!color.validate()) {
+            // If validation fails, add errors to the flash scope
+            flash.errors = color.errors
+            // Redirect back to the form
+            redirect(action: "addColor")
+            return
+        }
         productService.addDataColor(params)
 
         redirect(url: "/product/formColor")

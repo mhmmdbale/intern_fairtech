@@ -17,6 +17,8 @@ class UrlMappings {
 
         "/dashboard"(controller: "dashboard", action: "index")
         "/product"(controller: "product", action: "index")
+        "/product/formAdd"(controller: "product", action: "addProduct")
+        "/product/saveProduct"(controller: "product", action: "saveProduct")
         "/product/formColor"(controller: "color", action: "addColor")
         "/product/addColor"(controller: "color", action: "saveColor")
         "/product/deleteColor/$id"(controller: "color", action: "deleteColor")

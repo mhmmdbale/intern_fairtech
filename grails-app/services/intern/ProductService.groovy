@@ -11,6 +11,40 @@ class ProductService {
         return colors
     }
 
+    def getProductType(GrailsParameterMap params){
+        def type = params.type
+
+        if (type == "KAOS") {
+            return Product.ProductType.KAOS
+        } else if (type == "JAKET") {
+            return Product.ProductType.JAKET
+        } else if (type == "SWEETER") {
+            return Product.ProductType.SWEETER
+        }
+    }
+
+    def getProductSleeve(GrailsParameterMap params){
+        def sleeve = params.type
+
+        if (sleeve == "PENDEK") {
+            return Product.ProductSleeve.PENDEK
+        } else if (sleeve == "PANJANG") {
+            return Product.ProductSleeve.PANJANG
+        }
+    }
+
+    void addDataProduct(GrailsParameterMap params) {
+
+        Product product = new Product()
+        product.code = params.code
+        product.name = params.name
+        product.type = params.type
+        product.sleeve = params.sleeve
+        product.price = params.price.toInteger()
+
+        product.save(flush: true)
+    }
+
     void addDataColor(GrailsParameterMap params) {
 
         Color color = new Color()

@@ -6,7 +6,7 @@ class Product {
     ProductType type
     ProductSleeve sleeve
     Integer price
-    String photo
+    String image
     static hasMany = [productColors: ProductColor]
 
     static constraints = {
@@ -15,7 +15,7 @@ class Product {
         type blank: false, nullable: false
         sleeve blank: false, nullable: false
         price blank: false, nullable: false
-        photo nullable: true
+        image nullable: true
     }
 
     static enum ProductType {
