@@ -16,5 +16,6 @@ class UrlMappings {
         "404"(view:'/notFound')
 
         "/dashboard"(controller: "dashboard", action: "index")
+        "/product"(controller: "product", action: "index")
     }
 }

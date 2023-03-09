@@ -8,7 +8,7 @@
             <a href="/product"><i class="material-icons-outlined">checkroom</i>product</a>
         </li>
         <li>
-            <a href="profile.html"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
+            <a href="/profile.html"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
         </li>
         <li>
             <a href="file-manager.html"><i class="material-icons">store</i>reward shop</a>
