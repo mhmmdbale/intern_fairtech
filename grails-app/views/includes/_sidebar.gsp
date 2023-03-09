@@ -2,10 +2,10 @@
 <div class="page-sidebar-inner slimscroll">
     <ul class="accordion-menu">
         <li class="active-page">
-            <a href="index.html" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+            <a href="/dashboard" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
         </li>
         <li>
-            <a href="mailbox.html"><i class="material-icons-outlined">checkroom</i>product</a>
+            <a href="/product"><i class="material-icons-outlined">checkroom</i>product</a>
         </li>
         <li>
             <a href="profile.html"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
