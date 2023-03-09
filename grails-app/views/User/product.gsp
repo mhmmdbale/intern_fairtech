@@ -30,8 +30,8 @@
                     <div class="card">
                         <div class="card-body">
                             <p>Pilih tombol dibawah untuk menambah data produk atau warna</code>.</p>
-                            <button type="button" class="btn btn-primary btn-lg btn-block">PRODUK</button>
-                            <button type="button" class="btn btn-secondary btn-lg btn-block">WARNA</button>
+                            <a href="/product/formAdd" type="button" class="btn btn-primary btn-lg btn-block" style="color: white">PRODUK</a>
+                            <a href="/product/formColor" type="button" class="btn btn-secondary btn-lg btn-block">WARNA</a>
                         </div>
                     </div>
                 </div>

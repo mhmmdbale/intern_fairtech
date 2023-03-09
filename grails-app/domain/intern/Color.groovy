@@ -5,7 +5,7 @@ class Color {
     String name
     static hasMany = [productColors: ProductColor]
     static constraints = {
-        code blank: false, nullable: false
+        code blank: false, nullable: false, unique: true
         name blank: false, nullable: false
     }
 }

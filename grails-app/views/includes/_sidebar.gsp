@@ -5,16 +5,16 @@
             <a href="/dashboard" class="${request.forwardURI.startsWith('/dashboard') ? 'active' : ''}"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
         </li>
         <li class="${request.forwardURI.startsWith('/product') ? 'active-page' : ''}">
-            <a href="/product" class="${request.forwardURI.startsWith('/product') ? 'active' : ''}"><i class="material-icons-outlined">checkroom</i>product</a>
+            <a href="/product" class="${request.forwardURI.startsWith('/product') ? 'active' : ''}"><i class="material-icons-outlined">checkroom</i>Product</a>
         </li>
         <li class="${request.forwardURI.startsWith('/order') ? 'active-page' : ''}">
-            <a href="/profile.html" class="${request.forwardURI.startsWith('/order') ? 'active' : ''}"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
+            <a href="/profile.html" class="${request.forwardURI.startsWith('/order') ? 'active' : ''}"><i class="material-icons-outlined">receipt_long</i>Pesanan</a>
         </li>
         <li class="${request.forwardURI.startsWith('/reward') ? 'active-page' : ''}">
-            <a href="file-manager.html" class="${request.forwardURI.startsWith('/reward') ? 'active' : ''}"><i class="material-icons">store</i>reward shop</a>
+            <a href="file-manager.html" class="${request.forwardURI.startsWith('/reward') ? 'active' : ''}"><i class="material-icons">store</i>Reward Shop</a>
         </li>
         <li class="${request.forwardURI.startsWith('/finance') ? 'active-page' : ''}">
-            <a href="calendar.html" class="${request.forwardURI.startsWith('/finance') ? 'active' : ''}"><i class="material-icons-outlined">account_balance</i>keuangan</a>
+            <a href="calendar.html" class="${request.forwardURI.startsWith('/finance') ? 'active' : ''}"><i class="material-icons-outlined">account_balance</i>Keuangan</a>
         </li>
         <li class="${request.forwardURI.startsWith('/admin') ? 'active-page' : ''}">
             <a href="todo.html" class="${request.forwardURI.startsWith('/admin') ? 'active' : ''}"><i class="material-icons">person</i>User</a>
