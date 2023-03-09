@@ -1,23 +1,23 @@
 <div class="logo-box"><a href="#" class="logo-text">Polymorphic</a><a href="#" id="sidebar-close"><i class="material-icons">close</i></a> <a href="#" id="sidebar-state"><i class="material-icons">adjust</i><i class="material-icons compact-sidebar-icon">panorama_fish_eye</i></a></div>
 <div class="page-sidebar-inner slimscroll">
     <ul class="accordion-menu">
-        <li class="active-page">
-            <a href="/dashboard" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+        <li class="${request.forwardURI.startsWith('/dashboard') ? 'active-page' : ''}">
+            <a href="/dashboard" class="${request.forwardURI.startsWith('/dashboard') ? 'active' : ''}"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
         </li>
-        <li>
-            <a href="/product"><i class="material-icons-outlined">checkroom</i>product</a>
+        <li class="${request.forwardURI.startsWith('/product') ? 'active-page' : ''}">
+            <a href="/product" class="${request.forwardURI.startsWith('/product') ? 'active' : ''}"><i class="material-icons-outlined">checkroom</i>product</a>
         </li>
-        <li>
-            <a href="/profile.html"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
+        <li class="${request.forwardURI.startsWith('/order') ? 'active-page' : ''}">
+            <a href="/profile.html" class="${request.forwardURI.startsWith('/order') ? 'active' : ''}"><i class="material-icons-outlined">receipt_long</i>pesanan</a>
         </li>
-        <li>
-            <a href="file-manager.html"><i class="material-icons">store</i>reward shop</a>
+        <li class="${request.forwardURI.startsWith('/reward') ? 'active-page' : ''}">
+            <a href="file-manager.html" class="${request.forwardURI.startsWith('/reward') ? 'active' : ''}"><i class="material-icons">store</i>reward shop</a>
         </li>
-        <li>
-            <a href="calendar.html"><i class="material-icons-outlined">account_balance</i>keuangan</a>
+        <li class="${request.forwardURI.startsWith('/finance') ? 'active-page' : ''}">
+            <a href="calendar.html" class="${request.forwardURI.startsWith('/finance') ? 'active' : ''}"><i class="material-icons-outlined">account_balance</i>keuangan</a>
         </li>
-        <li>
-            <a href="todo.html"><i class="material-icons">person</i>User</a>
+        <li class="${request.forwardURI.startsWith('/admin') ? 'active-page' : ''}">
+            <a href="todo.html" class="${request.forwardURI.startsWith('/admin') ? 'active' : ''}"><i class="material-icons">person</i>User</a>
         </li>
 
     </ul>

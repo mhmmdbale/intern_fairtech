@@ -20,3 +20,6 @@
 <asset:javascript src="template/plugins/flot/jquery.flot.tooltip.min.js" />
 <asset:javascript src="template/js/connect.min.js" />
 <asset:javascript src="template/js/pages/dashboard.js" />
+
+<asset:javascript src="template/js/pages/datatables.js" />
+<asset:javascript src="template/plugins/DataTables/datatables.min.js" />
