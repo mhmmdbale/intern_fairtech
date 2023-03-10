@@ -1,3 +1,8 @@
+
+myapp:
+    imageUploadPath: 'C:\Users\Muhammad Ikbal\IdeaProjects\intern_fairtech\static\images'
+
+
 ---
 grails:
     profile: web

@@ -19,5 +19,14 @@ class UrlMappings {
         "404"(view:'/notFound')
 
         "/dashboard"(controller: "dashboard", action: "index")
+        "/product"(controller: "product", action: "index")
+        "/product/formAdd"(controller: "product", action: "addProduct")
+        "/product/saveProduct"(controller: "product", action: "saveProduct")
+        "/product/editProduct/$id"(controller: "product", action: "editProduct")
+        "/product/deleteProduct/$id"(controller: "product", action: "deleteProduct")
+        "/product/formColor"(controller: "color", action: "addColor")
+        "/product/addColor"(controller: "color", action: "saveColor")
+        "/product/deleteColor/$id"(controller: "color", action: "deleteColor")
+        "/product/editColor/$id"(controller: "color", action: "updateColor")
     }
 }

@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <asset:stylesheet src="template/plugins/bootstrap/css/bootstrap.min.css" />
 <asset:stylesheet src="template/plugins/font-awesome/css/all.min.css" />
+<asset:stylesheet src="template/plugins/DataTables/datatables.min.css" />
 
 <!-- Theme Styles -->
 <asset:stylesheet src="template/css/connect.min.css" />
