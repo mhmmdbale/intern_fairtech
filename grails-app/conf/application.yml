@@ -1,6 +1,6 @@
 
 myapp:
-    imageUploadPath: 'C:\Users\Muhammad Ikbal\IdeaProjects\intern_fairtech\public\images'
+    imageUploadPath: 'C:\Users\Muhammad Ikbal\IdeaProjects\intern_fairtech\static\images'
 
 
 ---

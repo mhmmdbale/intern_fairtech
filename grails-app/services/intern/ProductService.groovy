@@ -7,16 +7,24 @@ import javax.servlet.http.HttpServletRequest
 import grails.core.GrailsApplication
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import grails.util.Holders
+import org.springframework.core.io.Resource
 
 @Transactional
 class ProductService {
 
+    def assetResourceLocator
     GrailsApplication grailsApplication
     def servletContext
 
     def getAllColor(){
         List<Color> colors = Color.list()
         return colors
+    }
+
+    def getAllProduct(){
+        List<Product> products = Product.list()
+        return products
     }
 
     def getProductType(GrailsParameterMap params){
@@ -61,14 +69,25 @@ class ProductService {
             String fileName = "${formattedDateTime}_${originalFilename}"
 
             String assetsPath = grailsApplication.config.myapp.imageUploadPath
-            def directoryPath = "$assetsPath/products"
-            imageFile.transferTo(new File("$directoryPath/$fileName"))
+//            String assetsPath = grailsApplication.mainContext.servletContext.getRealPath('/assets')
+            def productsPath = "${assetsPath}/products"
+
+            def file = new File("${productsPath}/${fileName}")
+            imageFile.transferTo(file)
 
             // Set the image filename in the Product object
             product.image = fileName
         }
 
         product.save(flush: true)
+    }
+
+    void deleteDataProduct(long id){
+        Product product = Product.findById(id)
+        if (product) {
+            ProductColor.where { product == product }.deleteAll()
+            product.delete()
+        }
     }
 
     void addDataColor(GrailsParameterMap params) {

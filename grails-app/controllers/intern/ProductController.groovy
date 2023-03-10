@@ -7,7 +7,10 @@ class ProductController {
     def productService
 
     def index() {
-        render(view: "/user/product")
+        List<Color> products = productService.getAllProduct()
+        // Pass the image upload path as a model attribute
+        def imageUploadPath = grailsApplication.config.myapp.imageUploadPath
+        render(view: "/user/product", model: [products: products, imageUploadPath: imageUploadPath])
     }
 
     def addProduct(){
@@ -24,6 +27,17 @@ class ProductController {
             return
         }
         productService.addDataProduct(params, request)
+
+        redirect(action: "index")
+    }
+
+    def deleteProduct(long id){
+        try {
+            productService.deleteDataProduct(id)
+            flash.message = "Data Berhasil di Hapus"
+        } catch (Exception e) {
+            flash.error = "Terjadi Kesalahan Saat Menghapus Data"
+        }
 
         redirect(action: "index")
     }
