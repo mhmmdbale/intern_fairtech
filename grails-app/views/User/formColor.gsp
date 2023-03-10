@@ -38,11 +38,11 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Daftar Warna</h5>
-                            <g:if test="${flash.message}">
-                                <div class="alert alert-danger">
-                                    <li>${flash.message}</li>
-                                </div>
-                            </g:if>
+%{--                            <g:if test="${flash.message}">--}%
+%{--                                <div class="alert alert-danger">--}%
+%{--                                    <li>${flash.message}</li>--}%
+%{--                                </div>--}%
+%{--                            </g:if>--}%
 %{--                            <g:if test="${flash.errors}">--}%
 %{--                                <div class="alert alert-danger">--}%
 %{--                                    <ul>--}%
@@ -52,7 +52,15 @@
 %{--                                    </ul>--}%
 %{--                                </div>--}%
 %{--                            </g:if>--}%
-
+                            <g:if test="${color?.hasErrors()}">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <g:eachError bean="${color}" var="error">
+                                            <li><g:message error="${error}"/></li>
+                                        </g:eachError>
+                                    </ul>
+                                </div>
+                            </g:if>
                             <table id="zero-conf" class="display" style="width:100%">
                                 <thead>
                                 <tr>

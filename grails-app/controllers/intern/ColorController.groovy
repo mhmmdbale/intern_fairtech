@@ -1,6 +1,8 @@
 package intern
 import org.springframework.transaction.annotation.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['ROLE_ADMIN'])
 @Transactional
 class ColorController {
 
@@ -15,11 +17,11 @@ class ColorController {
 
     def saveColor(){
         def color = new Color(params)
-        if (!color.validate()) {
-            // If validation fails, add errors to the flash scope
-            flash.message = "Kode telah ada sebelumnya"
+        color.validate()
+        if (color.hasErrors()) {
             // Redirect back to the form
-            redirect(action: "addColor")
+            List<Color> colors = productService.getAllColor()
+            render(view: "/user/formColor", model: [color : color, colors: colors])
             return
         }
         productService.addDataColor(params)
