@@ -4,13 +4,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'intern.UserRol
 grails.plugin.springsecurity.authority.className = 'intern.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
-	[pattern: '/dashboard/*',    access: ['permitAll']],
-	[pattern: '/product/**',     access: ['permitAll']],
-	[pattern: '/color/*',    	 access: ['permitAll']],
-	[pattern: '/**/images/**',   access: ['permitAll']],
-	[pattern: '/layouts/*',      access: ['permitAll']],
-	[pattern: '/User/*',         access: ['permitAll']],
-	[pattern: '/user/*',         access: ['permitAll']],
+//	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/registerUser',   access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
