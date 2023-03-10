@@ -73,7 +73,7 @@
                                         <td>${product.sleeve}</td>
                                         <td><g:formatNumber number="${product.price/1000}" format="#,##0.000"/></td>
                                         <td style="vertical-align: middle;text-align: center;">
-                                            <button data-toggle="modal" data-target="#editModal${product.id}" type="button" class="btn mb-1 btn-outline-info btn-md"><i class="material-icons-outlined">palette</i>
+                                            <button type="button" class="btn mb-1 btn-outline-info btn-md"><i class="material-icons-outlined">palette</i>
                                             </button>
                                         </td>
                                         <td style="vertical-align: middle;text-align: center;">
@@ -81,8 +81,8 @@
                                             </button>
                                         </td>
                                         <td style="vertical-align: middle;text-align: center;">
-                                            <button data-toggle="modal" data-target="#editModal${product.id}" type="button" class="btn mb-1 btn-outline-primary btn-md"><i class="fa fa-edit"></i>
-                                            </button>
+                                            <a href="/product/editProduct/${product.id}" type="button" class="btn mb-1 btn-outline-primary btn-md"><i class="fa fa-edit"></i>
+                                            </a>
                                             <button data-toggle="modal" data-target="#deleteModal${product.id}" type="button" class="btn mb-1 btn-outline-danger btn-md"><i class="fa fa-trash"></i>
                                             </button>
                                         </td>

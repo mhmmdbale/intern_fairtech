@@ -31,6 +31,11 @@ class ProductController {
         redirect(action: "index")
     }
 
+    def editProduct(long id){
+        Product product = Product.findById(id)
+        render(view: "/user/editProduct", model: [product: product])
+    }
+
     def deleteProduct(long id){
         try {
             productService.deleteDataProduct(id)
