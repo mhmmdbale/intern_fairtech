@@ -18,12 +18,12 @@ class ProductController {
         def product = new Product(params)
         if (!product.validate()) {
             // If validation fails, add errors to the flash scope
-            flash.errors = product.errors
+            flash.message = "Kode telah ada sebelumnya"
             // Redirect back to the form
             redirect(action: "addProduct")
             return
         }
-        productService.addDataProduct(params)
+        productService.addDataProduct(params, request)
 
         redirect(action: "index")
     }

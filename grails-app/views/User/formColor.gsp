@@ -38,16 +38,20 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Daftar Warna</h5>
-
-                            <g:if test="${flash.errors}">
+                            <g:if test="${flash.message}">
                                 <div class="alert alert-danger">
-                                    <ul>
-                                        <g:eachError var="error" in="${flash.errors}">
-                                            <li>${error.defaultMessage}</li>
-                                        </g:eachError>
-                                    </ul>
+                                    <li>${flash.message}</li>
                                 </div>
                             </g:if>
+%{--                            <g:if test="${flash.errors}">--}%
+%{--                                <div class="alert alert-danger">--}%
+%{--                                    <ul>--}%
+%{--                                        <g:eachError var="error" in="${flash.errors}">--}%
+%{--                                            <li>${error.defaultMessage}</li>--}%
+%{--                                        </g:eachError>--}%
+%{--                                    </ul>--}%
+%{--                                </div>--}%
+%{--                            </g:if>--}%
 
                             <table id="zero-conf" class="display" style="width:100%">
                                 <thead>

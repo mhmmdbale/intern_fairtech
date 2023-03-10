@@ -29,14 +29,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Tambah Data Produk</h5>
-                            <g:if test="${flash.errors}">
+                            <g:if test="${flash.message}">
                                 <div class="alert alert-danger">
-                                    <ul>
-                                        <li>${flash.errors}</li>
-                                        <g:eachError var="error" in="${flash.errors}">
-                                            <li>${error.defaultMessage}</li>
-                                        </g:eachError>
-                                    </ul>
+                                    <li>${flash.message}</li>
                                 </div>
                             </g:if>
                             <form action="${createLink(uri: '/product/saveProduct')}" method="post" enctype="multipart/form-data">
@@ -65,7 +60,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPrice1">Harga: </label>
-                                    <input type="text" class="form-control" name="price" id="exampleInputPrice1" onkeypress="return isNumberKey(event)">
+                                    <input required type="text" class="form-control" name="price" id="exampleInputPrice1" onkeypress="return isNumberKey(event)">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputImage1">Gambar: </label>
