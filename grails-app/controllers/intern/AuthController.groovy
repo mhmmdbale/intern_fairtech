@@ -15,7 +15,7 @@ class AuthController {
         def authFail = params.fail
 
         if (springSecurityService.isLoggedIn()) {
-            redirect(uri: '/user/index')
+            redirect(uri: '/dashboard')
             return
         } else {
             render(view: '/authview/login')
