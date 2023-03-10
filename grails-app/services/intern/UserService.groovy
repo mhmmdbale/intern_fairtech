@@ -36,7 +36,7 @@ class UserService {
         user.name = params.name
         user.username = params.username
 
-        user.password = hashPassword(params.password)
+        user.password = params.password
 
         user.save(flush: true)
         UserRole.create(user, Role.findById(params.role))
