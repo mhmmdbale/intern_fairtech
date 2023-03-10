@@ -4,6 +4,8 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+import org.springframework.security.core.context.SecurityContextHolder
 
 class AuthController {
 
@@ -12,7 +14,7 @@ class AuthController {
     def login() {
         def authFail = params.fail
 
-        if (springSecurityService.currentUser?.isAuthenticated()) {
+        if (springSecurityService.isLoggedIn()) {
             redirect(uri: '/user/index')
             return
         } else {
@@ -27,11 +29,21 @@ class AuthController {
         def password = params.password
 
         Authentication auth = new UsernamePasswordAuthenticationToken(username, password)
-        auth = springSecurityService.authenticate(auth)
+        auth = springSecurityService.reauthenticate(username, password)
         if (auth) {
             redirect(uri: '/user/index')
         } else {
             redirect(uri: '/login/auth', params: [fail: true])
         }
+    }
+
+    def logout(){
+        def user = springSecurityService.getCurrentUser()
+
+        if (user) {
+            new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.context.authentication)
+        }
+
+        redirect(action: 'login')
     }
 }

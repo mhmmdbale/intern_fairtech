@@ -4,6 +4,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
@@ -11,7 +12,7 @@ import grails.compiler.GrailsCompileStatic
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
-    def springSecurityService
+    transient springSecurityService
 
     String username
     String password
@@ -23,23 +24,28 @@ class User implements Serializable {
     boolean passwordExpired
 //    static hasMany = [userRoles: UserRole]
 
-//    <Role> getAuthorities() {
-//        UserRole.findAllByUser(this)*.role
-//    }
+    List<Role> getAuthorities() {
+        List<Role> roles = new ArrayList<>()
+        List<UserRole> userRoles= UserRole.findAllByUser(this)
+        userRoles.each {
+            roles.push(it?.role)
+        }
+        return roles
+    }
 
-//    def beforeInsert() {
-//        encodePassword()
-//    }
-//
-//    def beforeUpdate() {
-//        if (isDirty('password')) {
-//            encodePassword()
-//        }
-//    }
+    def beforeInsert() {
+        encodePassword()
+    }
 
-//    protected void encodePassword() {
-//        password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-//    }
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
+
+    protected void encodePassword() {
+        password = new BCryptPasswordEncoder().encode(password)
+    }
 
     static transients = ['springSecurityService']
 
