@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource
 class ProductService {
 
     def assetResourceLocator
+    def assetProcessorService
     GrailsApplication grailsApplication
     def servletContext
 
@@ -68,9 +69,10 @@ class ProductService {
             String originalFilename = imageFile.getOriginalFilename()
             String fileName = "${formattedDateTime}_${originalFilename}"
 
+//            String assetsPath = "C:\\Users\\Muhammad Ikbal\\IdeaProjects\\intern_fairtech\\grails-app\\assets\\images"
             String assetsPath = grailsApplication.config.myapp.imageUploadPath
 //            String assetsPath = grailsApplication.mainContext.servletContext.getRealPath('/assets')
-            def productsPath = "${assetsPath}/products"
+            def productsPath = "${assetsPath}\\products"
 
             def file = new File("${productsPath}/${fileName}")
             imageFile.transferTo(file)
