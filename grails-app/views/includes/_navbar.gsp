@@ -10,10 +10,12 @@
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <asset:image src="template/images/avatars/profile-image-1.png" />
-                    <span>Nancy Moore</span><i class="material-icons dropdown-icon">keyboard_arrow_down</i>
+                    <sec:ifLoggedIn>
+                        <span>${sec.loggedInUserInfo(field: 'username')}</span><i class="material-icons dropdown-icon">keyboard_arrow_down</i>
+                    </sec:ifLoggedIn>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="auth/logout">Log out</a>
                 </div>
             </li>
             <li class="nav-item">

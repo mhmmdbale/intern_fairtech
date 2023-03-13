@@ -21,10 +21,11 @@ class ColorController {
         if (color.hasErrors()) {
             // Redirect back to the form
             List<Color> colors = productService.getAllColor()
-            render(view: "/user/formColor", model: [color : color, colors: colors])
+            render(view: "/user/formColor", model: [colorError : color, colors: colors])
             return
         }
         productService.addDataColor(params)
+        flash.message = "Data Berhasil di Simpan"
 
         redirect(url: "/product/formColor")
     }
@@ -39,16 +40,16 @@ class ColorController {
         Color check = Color.findById(id)
         if (check.code != params.code){
             def color = new Color(params)
-            if (!color.validate()) {
-                // If validation fails, add errors to the flash scope
-                flash.message = "Kode telah ada sebelumnya"
+            color.validate()
+            if (color.hasErrors()) {
                 // Redirect back to the form
-                redirect(action: "addColor")
+                List<Color> colors = productService.getAllColor()
+                render(view: "/user/formColor", model: [colorError : color, colors: colors])
                 return
             }
         }
         productService.updateDataColor(id, params)
-
+        flash.message = "Data Berhasil di Ubah"
         redirect(url: "/product/formColor")
     }
 }

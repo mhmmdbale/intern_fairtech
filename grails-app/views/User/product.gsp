@@ -99,7 +99,7 @@
                                                 </div>
                                                 <div class="modal-body" style="display: flex; justify-content: center;">
                                                     <g:if test="${product.image}">
-                                                        <img width="400" height="200" src="${resource(dir: 'images/products', file: product.image)}" alt="Product image">
+                                                        <asset:image src="products/${product.image}" width="400" height="200"></asset:image>
                                                     </g:if>
                                                     <g:else>
                                                         Tidak Ada Gambar.
@@ -130,6 +130,7 @@
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                                             <button type="submit" class="btn btn-danger">Hapus</button>
                                                         </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest
 import grails.core.GrailsApplication
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.nio.file.Files
+import java.nio.file.Paths
 import grails.util.Holders
 import org.springframework.core.io.Resource
 
@@ -69,10 +71,9 @@ class ProductService {
             String originalFilename = imageFile.getOriginalFilename()
             String fileName = "${formattedDateTime}_${originalFilename}"
 
-//            String assetsPath = "C:\\Users\\Muhammad Ikbal\\IdeaProjects\\intern_fairtech\\grails-app\\assets\\images"
             String assetsPath = grailsApplication.config.myapp.imageUploadPath
 //            String assetsPath = grailsApplication.mainContext.servletContext.getRealPath('/assets')
-            def productsPath = "${assetsPath}\\products"
+            def productsPath = "${assetsPath}/products"
 
             def file = new File("${productsPath}/${fileName}")
             imageFile.transferTo(file)
@@ -88,6 +89,14 @@ class ProductService {
         Product product = Product.findById(id)
         if (product) {
             ProductColor.where { product == product }.deleteAll()
+            // Check if the image file exists and delete it
+            if (product.image) {
+                String assetsPath = grailsApplication.config.myapp.imageUploadPath
+                String imagePath = "${assetsPath}/products/${product.image}"
+                if (Files.exists(Paths.get(imagePath))) {
+                    Files.delete(Paths.get(imagePath))
+                }
+            }
             product.delete()
         }
     }

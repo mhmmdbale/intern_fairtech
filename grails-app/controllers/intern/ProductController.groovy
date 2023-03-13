@@ -21,14 +21,14 @@ class ProductController {
 
     def saveProduct(){
         def product = new Product(params)
-        if (!product.validate()) {
-            // If validation fails, add errors to the flash scope
-            flash.message = "Kode telah ada sebelumnya"
+        product.validate()
+        if (product.hasErrors()) {
             // Redirect back to the form
-            redirect(action: "addProduct")
+            render(view: "/user/formProduct", model: [productError : product])
             return
         }
         productService.addDataProduct(params, request)
+        flash.message = "Data Berhasil di Simpan"
 
         redirect(action: "index")
     }

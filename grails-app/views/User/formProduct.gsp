@@ -29,9 +29,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Tambah Data Produk</h5>
-                            <g:if test="${flash.message}">
+                            <g:if test="${productError?.hasErrors()}">
                                 <div class="alert alert-danger">
-                                    <li>${flash.message}</li>
+                                    <ul>
+                                        <g:eachError bean="${productError}" var="error">
+                                            <li><g:message error="${error}"/></li>
+                                        </g:eachError>
+                                    </ul>
                                 </div>
                             </g:if>
                             <form action="${createLink(uri: '/product/saveProduct')}" method="post" enctype="multipart/form-data">

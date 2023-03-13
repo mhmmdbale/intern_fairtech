@@ -38,24 +38,15 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Daftar Warna</h5>
-%{--                            <g:if test="${flash.message}">--}%
-%{--                                <div class="alert alert-danger">--}%
-%{--                                    <li>${flash.message}</li>--}%
-%{--                                </div>--}%
-%{--                            </g:if>--}%
-%{--                            <g:if test="${flash.errors}">--}%
-%{--                                <div class="alert alert-danger">--}%
-%{--                                    <ul>--}%
-%{--                                        <g:eachError var="error" in="${flash.errors}">--}%
-%{--                                            <li>${error.defaultMessage}</li>--}%
-%{--                                        </g:eachError>--}%
-%{--                                    </ul>--}%
-%{--                                </div>--}%
-%{--                            </g:if>--}%
-                            <g:if test="${color?.hasErrors()}">
+                            <g:if test="${flash.message}">
+                                <div class="alert alert-success">
+                                    <li>${flash.message}</li>
+                                </div>
+                            </g:if>
+                            <g:if test="${colorError?.hasErrors()}">
                                 <div class="alert alert-danger">
                                     <ul>
-                                        <g:eachError bean="${color}" var="error">
+                                        <g:eachError bean="${colorError}" var="error">
                                             <li><g:message error="${error}"/></li>
                                         </g:eachError>
                                     </ul>
@@ -106,6 +97,7 @@
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                                             <button type="submit" class="btn btn-danger">Ubah Data</button>
                                                         </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -124,6 +116,7 @@
                                                     <div class="modal-body">
                                                         <b>APA ANDA YAKIN UNTUK MENGHAPUS DATA INI ???</b>
                                                         <input type="hidden" class="form-control" name="id">
+                                                    </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                                         <button type="submit" class="btn btn-danger">Hapus</button>
