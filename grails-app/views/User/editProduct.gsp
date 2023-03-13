@@ -28,12 +28,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Ubah Data Produk</h5>
-                            <g:if test="${flash.message}">
+                            <g:if test="${productError?.hasErrors()}">
                                 <div class="alert alert-danger">
-                                    <li>${flash.message}</li>
+                                    <ul>
+                                        <g:eachError bean="${productError}" var="error">
+                                            <li><g:message error="${error}"/></li>
+                                        </g:eachError>
+                                    </ul>
                                 </div>
                             </g:if>
-                            <form action="${createLink(uri: '/product/updateProduct')}" method="post" enctype="multipart/form-data">
+                            <form action="${createLink(uri: '/product/updateProduct/'+ product.id)}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="exampleInputCode1">Kode: </label>
                                     <input required value="${product.code}" type="text" class="form-control" name="code" id="exampleInputCode1">
@@ -63,6 +67,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputImage1" class="form-label">File</label>
+                                    <g:if test="${product.image}">
+                                        <br><asset:image src="products/${product.image}" width="200" height="100"></asset:image>
+                                    </g:if>
                                     <input type="hidden" value="${product.image}" id="checkFile">
                                     <div class="custom-control custom-switch" id="switchFile">
                                         <input type="checkbox" onchange="del()" class="custom-control-input" name="del_file" id="switchDelete">
@@ -70,11 +77,7 @@
                                     </div>
                                     <input type="file" class="form-control" name="file" id="exampleInputImage1">
                                 </div>
-%{--                                <div class="form-group">--}%
-%{--                                    <label for="exampleInputImage1">Gambar: </label>--}%
-%{--                                    <input type="file" class="form-control" name="file" id="exampleInputImage1">--}%
-%{--                                </div>--}%
-                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="submit" class="btn btn-primary">Ubah</button>
                             </form>
                         </div>
                     </div>
@@ -104,6 +107,7 @@
                 d.style.display = "none";
                 d.value = '';
             }
+            console.log(document.getElementById("switchDelete").value)
             console.log(document.getElementById("checkFile").value)
         }
         function isNumberKey(evt) {

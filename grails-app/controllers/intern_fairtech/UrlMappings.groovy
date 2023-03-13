@@ -23,6 +23,7 @@ class UrlMappings {
         "/product/formAdd"(controller: "product", action: "addProduct")
         "/product/saveProduct"(controller: "product", action: "saveProduct")
         "/product/editProduct/$id"(controller: "product", action: "editProduct")
+        "/product/updateProduct/$id"(controller: "product", action: "updateProduct")
         "/product/deleteProduct/$id"(controller: "product", action: "deleteProduct")
         "/product/formColor"(controller: "color", action: "addColor")
         "/product/addColor"(controller: "color", action: "saveColor")

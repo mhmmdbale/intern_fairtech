@@ -38,6 +38,23 @@ class ProductController {
         render(view: "/user/editProduct", model: [product: product])
     }
 
+    def updateProduct(long id){
+        Product check = Product.findById(id)
+        if (check.code != params.code){
+            def product = new Product(params)
+            product.validate()
+            if (product.hasErrors()) {
+                // Redirect back to the form
+                Product productData = Product.findById(id)
+                render(view: "/user/editProduct", model: [product: productData, productError: product])
+                return
+            }
+        }
+        productService.updateDataProduct(id, params, request)
+        flash.message = "Data Berhasil di Ubah"
+        redirect(action: "index")
+    }
+
     def deleteProduct(long id){
         try {
             productService.deleteDataProduct(id)

@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 class AuthController {
 
@@ -27,6 +28,18 @@ class AuthController {
     def authenticate() {
         def username = params.username
         def password = params.password
+
+//        def user = User.findByUsername(username)
+//        if (!user) {
+//            redirect(uri: '/login/auth', params: [fail: true])
+//            return
+//        }
+//        def encoder = new BCryptPasswordEncoder()
+//
+//        if (!encoder.matches(password, user.password)) {
+//            redirect(uri: '/login/auth', params: [fail: true])
+//            return
+//        }
 
         Authentication auth = new UsernamePasswordAuthenticationToken(username, password)
         auth = springSecurityService.reauthenticate(username, password)

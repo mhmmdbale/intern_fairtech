@@ -52,6 +52,30 @@ class ProductService {
         }
     }
 
+    void deleteImage(image){
+        String assetsPath = grailsApplication.config.myapp.imageUploadPath
+        String imagePath = "${assetsPath}/products/${image}"
+        if (Files.exists(Paths.get(imagePath))) {
+            Files.delete(Paths.get(imagePath))
+        }
+    }
+
+    def storeImage(MultipartFile imageFile){
+        // Save the file to the assets directory
+        LocalDateTime now = LocalDateTime.now()
+        String formattedDateTime = now.format(DateTimeFormatter.ofPattern('yyyyMMddHHmmssSSS'))
+        String originalFilename = imageFile.getOriginalFilename()
+        String fileName = "${formattedDateTime}_${originalFilename}"
+
+        String assetsPath = grailsApplication.config.myapp.imageUploadPath
+        def productsPath = "${assetsPath}/products"
+
+        def file = new File("${productsPath}/${fileName}")
+        imageFile.transferTo(file)
+
+        return fileName
+    }
+
     void addDataProduct(GrailsParameterMap params, HttpServletRequest request) {
         // Get the uploaded file from the request
         MultipartFile imageFile = request.getFile('file')
@@ -65,23 +89,41 @@ class ProductService {
 
         // Do something with the file
         if (imageFile?.isEmpty() == false) {
-            // Save the file to the assets directory
-            LocalDateTime now = LocalDateTime.now()
-            String formattedDateTime = now.format(DateTimeFormatter.ofPattern('yyyyMMddHHmmssSSS'))
-            String originalFilename = imageFile.getOriginalFilename()
-            String fileName = "${formattedDateTime}_${originalFilename}"
-
-            String assetsPath = grailsApplication.config.myapp.imageUploadPath
-//            String assetsPath = grailsApplication.mainContext.servletContext.getRealPath('/assets')
-            def productsPath = "${assetsPath}/products"
-
-            def file = new File("${productsPath}/${fileName}")
-            imageFile.transferTo(file)
-
-            // Set the image filename in the Product object
+            String fileName = storeImage(imageFile)
             product.image = fileName
         }
 
+        product.save(flush: true)
+    }
+
+    void updateDataProduct(long id, GrailsParameterMap params, HttpServletRequest request){
+        // Get the uploaded file from the request
+        MultipartFile imageFile = request.getFile('file')
+
+        Product product = Product.findById(id)
+        product.code = params.code
+        product.name = params.name
+        product.type = getProductType(params)
+        product.sleeve = getProductSleeve(params)
+        product.price = params.price.toInteger()
+
+        if(product.image){
+            if(params.del_file){
+                deleteImage(product.image)
+                product.image = null
+                if(imageFile?.isEmpty() == false) {
+                    String fileName = storeImage(imageFile)
+
+                    product.image = fileName
+                }
+            }
+        }else {
+            if(imageFile?.isEmpty() == false) {
+                String fileName = storeImage(imageFile)
+
+                product.image = fileName
+            }
+        }
         product.save(flush: true)
     }
 
@@ -91,11 +133,7 @@ class ProductService {
             ProductColor.where { product == product }.deleteAll()
             // Check if the image file exists and delete it
             if (product.image) {
-                String assetsPath = grailsApplication.config.myapp.imageUploadPath
-                String imagePath = "${assetsPath}/products/${product.image}"
-                if (Files.exists(Paths.get(imagePath))) {
-                    Files.delete(Paths.get(imagePath))
-                }
+                deleteImage(product.image)
             }
             product.delete()
         }
