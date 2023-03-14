@@ -52,7 +52,7 @@ class ProductService {
         }
     }
 
-    void deleteImage(image){
+    void deleteImage(String image){
         String assetsPath = grailsApplication.config.myapp.imageUploadPath
         String imagePath = "${assetsPath}/products/${image}"
         if (Files.exists(Paths.get(imagePath))) {
@@ -60,7 +60,7 @@ class ProductService {
         }
     }
 
-    def storeImage(MultipartFile imageFile){
+    String storeImage(MultipartFile imageFile){
         // Save the file to the assets directory
         LocalDateTime now = LocalDateTime.now()
         String formattedDateTime = now.format(DateTimeFormatter.ofPattern('yyyyMMddHHmmssSSS'))

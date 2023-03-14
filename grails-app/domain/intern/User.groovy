@@ -33,19 +33,19 @@ class User implements Serializable {
         return roles
     }
 
-    def beforeInsert() {
-        encodePassword()
-    }
-
-    def beforeUpdate() {
-        if (isDirty('password')) {
-            encodePassword()
-        }
-    }
-
-    protected void encodePassword() {
-        password = new BCryptPasswordEncoder().encode(password)
-    }
+//    def beforeInsert() {
+//        encodePassword()
+//    }
+//
+//    def beforeUpdate() {
+//        if (isDirty('password')) {
+//            encodePassword()
+//        }
+//    }
+//
+//    protected void encodePassword() {
+//        password = new BCryptPasswordEncoder().encode(password)
+//    }
 
     static transients = ['springSecurityService']
 

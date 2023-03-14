@@ -3,16 +3,13 @@ package intern
 import grails.gorm.transactions.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
 import grails.plugin.springsecurity.SpringSecurityService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Transactional
 class UserService {
 
     SpringSecurityService springSecurityService
 
-    def hashPassword(String password){
-        // Hash the password using Spring Security Core
-        return springSecurityService.encodePassword(password)
-    }
     def returnUser(User user){
         return [
             user: user,

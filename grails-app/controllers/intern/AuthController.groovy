@@ -2,14 +2,18 @@ package intern
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityService
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.authentication.AuthenticationManager
+
+import javax.naming.AuthenticationException
 
 class AuthController {
 
+    def authenticationManager
     SpringSecurityService springSecurityService
 
     def login() {
@@ -26,26 +30,17 @@ class AuthController {
     }
 
     def authenticate() {
-        def username = params.username
-        def password = params.password
+        String username = params.username
+        String password = params.password
 
-//        def user = User.findByUsername(username)
-//        if (!user) {
-//            redirect(uri: '/login/auth', params: [fail: true])
-//            return
-//        }
-//        def encoder = new BCryptPasswordEncoder()
-//
-//        if (!encoder.matches(password, user.password)) {
-//            redirect(uri: '/login/auth', params: [fail: true])
-//            return
-//        }
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password)
+        try {
+            Authentication auth = authenticationManager.authenticate(authRequest)
+            SecurityContextHolder.getContext().setAuthentication(auth)
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(username, password)
-        auth = springSecurityService.reauthenticate(username, password)
-        if (auth) {
-            redirect(uri: '/user/index')
-        } else {
+            redirect(uri: '/dashboard')
+        } catch (BadCredentialsException ex) {
+            flash.message = flash.message = "Username atau Password Salah"
             redirect(uri: '/login/auth', params: [fail: true])
         }
     }
