@@ -30,11 +30,9 @@
                             <h5 class="card-title">Ubah Data Produk</h5>
                             <g:if test="${productError?.hasErrors()}">
                                 <div class="alert alert-danger">
-                                    <ul>
-                                        <g:eachError bean="${productError}" var="error">
-                                            <li><g:message error="${error}"/></li>
-                                        </g:eachError>
-                                    </ul>
+                                    <g:eachError bean="${productError}" var="error">
+                                        <li><g:message error="${error}"/></li>
+                                    </g:eachError>
                                 </div>
                             </g:if>
                             <form action="${createLink(uri: '/product/updateProduct/'+ product.id)}" method="post" enctype="multipart/form-data">

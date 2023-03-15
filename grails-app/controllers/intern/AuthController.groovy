@@ -1,6 +1,5 @@
 package intern
 
-import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -8,19 +7,19 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.authentication.AuthenticationManager
-
-import javax.naming.AuthenticationException
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache
+import org.springframework.security.web.savedrequest.DefaultSavedRequest
 
 class AuthController {
 
-    def authenticationManager
+    AuthenticationManager authenticationManager
     SpringSecurityService springSecurityService
 
     def login() {
         def authFail = params.fail
 
         if (springSecurityService.isLoggedIn()) {
-            redirect(uri: '/dashboard')
+            redirect(controller: 'dashboard', action: 'index')
             return
         } else {
             render(view: '/authview/login')
@@ -38,10 +37,21 @@ class AuthController {
             Authentication auth = authenticationManager.authenticate(authRequest)
             SecurityContextHolder.getContext().setAuthentication(auth)
 
-            redirect(uri: '/dashboard')
-        } catch (BadCredentialsException ex) {
-            flash.message = flash.message = "Username atau Password Salah"
-            redirect(uri: '/login/auth', params: [fail: true])
+            // Get the saved request from the session
+            HttpSessionRequestCache requestCache = new HttpSessionRequestCache()
+            DefaultSavedRequest savedRequest = requestCache.getRequest(request, response)
+            if (savedRequest != null) {
+                // Redirect to the saved request URL
+                response.sendRedirect(savedRequest.getRedirectUrl())
+            } else {
+                // Redirect to the default URL
+                redirect(controller: 'dashboard', action: 'index')
+            }
+        } catch (BadCredentialsException e) {
+            User user = new User()
+            user.username = username
+            user.errors.reject('user.auth.failed', 'Username atau Password anda salah.')
+            respond([:], view: '/authview/login', model: [userError: user] ,status: 400)
         }
     }
 

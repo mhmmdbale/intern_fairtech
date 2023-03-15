@@ -5,7 +5,7 @@
   Time: 15:23
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="intern.Product" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
@@ -31,40 +31,38 @@
                             <h5 class="card-title">Tambah Data Produk</h5>
                             <g:if test="${productError?.hasErrors()}">
                                 <div class="alert alert-danger">
-                                    <ul>
-                                        <g:eachError bean="${productError}" var="error">
-                                            <li><g:message error="${error}"/></li>
-                                        </g:eachError>
-                                    </ul>
+                                    <g:eachError bean="${productError}" var="error">
+                                        <li><g:message error="${error}"/></li>
+                                    </g:eachError>
                                 </div>
                             </g:if>
                             <form action="${createLink(uri: '/product/saveProduct')}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="exampleInputCode1">Kode: </label>
-                                    <input required type="text" class="form-control" name="code" id="exampleInputCode1">
+                                    <input required type="text" class="form-control" name="code" id="exampleInputCode1" value="${productError?.code}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputName1">Nama: </label>
-                                    <input required type="text" class="form-control" name="name" id="exampleInputName1">
+                                    <input required type="text" class="form-control" name="name" id="exampleInputName1" value="${productError?.name}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlType1">Tipe: </label>
                                     <select class="form-control custom-select" name="type" id="exampleFormControlType1">
-                                        <option value="KAOS">Kaos</option>
-                                        <option value="JAKET">Jaket</option>
-                                        <option value="SWEETER">Sweeter</option>
+                                        <option value="KAOS" ${productError?.type == Product.ProductType.KAOS ? 'selected' : ''}>Kaos</option>
+                                        <option value="JAKET" ${productError?.type == Product.ProductType.JAKET ? 'selected' : ''}>Jaket</option>
+                                        <option value="SWEETER" ${productError?.type == Product.ProductType.SWEETER ? 'selected' : ''}>Sweeter</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSleeve1">Lengan: </label>
                                     <select class="form-control custom-select" name="sleeve" id="exampleFormControlSleeve1">
-                                        <option value="PENDEK">Pendek</option>
-                                        <option value="PANJANG">Panjang</option>
+                                        <option value="PENDEK" ${productError?.sleeve == Product.ProductSleeve.PENDEK ? 'selected' : ''}>Pendek</option>
+                                        <option value="PANJANG" ${productError?.sleeve == Product.ProductSleeve.PANJANG ? 'selected' : ''}>Panjang</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPrice1">Harga: </label>
-                                    <input required type="text" class="form-control" name="price" id="exampleInputPrice1" onkeypress="return isNumberKey(event)">
+                                    <input required type="text" class="form-control" name="price" id="exampleInputPrice1" onkeypress="return isNumberKey(event)" value="${productError?.price}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputImage1">Gambar: </label>

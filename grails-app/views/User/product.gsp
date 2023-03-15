@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <p>Pilih tombol dibawah untuk menambah data produk atau warna</code>.</p>
                             <a href="/product/formAdd" type="button" class="btn btn-primary btn-lg btn-block" style="color: white">PRODUK</a>
-                            <a href="/product/formColor" type="button" class="btn btn-secondary btn-lg btn-block">WARNA</a>
+                            <a href="/product/color" type="button" class="btn btn-secondary btn-lg btn-block">WARNA</a>
                         </div>
                     </div>
                 </div>
@@ -73,8 +73,8 @@
                                         <td>${product.sleeve}</td>
                                         <td><g:formatNumber number="${product.price/1000}" format="#,##0.000"/></td>
                                         <td style="vertical-align: middle;text-align: center;">
-                                            <button type="button" class="btn mb-1 btn-outline-info btn-md"><i class="material-icons-outlined">palette</i>
-                                            </button>
+                                            <a href="/product/detailColor/${product.id}" type="button" class="btn mb-1 btn-outline-info btn-md"><i class="material-icons-outlined">palette</i>
+                                            </a>
                                         </td>
                                         <td style="vertical-align: middle;text-align: center;">
                                             <button data-toggle="modal" data-target="#imageModalCenter${product.id}" type="button" class="btn mb-1 btn-outline-secondary btn-md"><i class="material-icons-outlined">image</i>

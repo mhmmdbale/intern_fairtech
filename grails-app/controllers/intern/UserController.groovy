@@ -26,9 +26,13 @@ class UserController {
     }
 
     @Secured(['permitAll'])
-    def addUser() {
-        def result = userService.addData(params)
-
-        render result as JSON
+    def addUser(User user) {
+        userService.addData(params, user)
+        if(user.hasErrors()){
+            List<Role> roles = userService.getRole()
+            respond([:], view: '/authview/register', model: [userError : user, roles: roles, roleError: params.role as int], status: 400)
+            return
+        }
+        redirect(controller: 'auth', action: 'login')
     }
 }

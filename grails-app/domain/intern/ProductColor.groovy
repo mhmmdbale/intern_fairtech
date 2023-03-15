@@ -13,6 +13,6 @@ class ProductColor {
     }
 
     static enum ColorStatus {
-        READY, HOLD, EMPTY
+        READY, PREORDER, EMPTY
     }
 }

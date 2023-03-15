@@ -8,11 +8,9 @@ class ColorController {
 
     def productService
 
-    def index() { }
-
-    def addColor(){
+    def index() {
         List<Color> colors = productService.getAllColor()
-        render(view: "/user/formColor", model: [colors: colors])
+        render(view: "/user/color", model: [colors: colors])
     }
 
     def saveColor(){

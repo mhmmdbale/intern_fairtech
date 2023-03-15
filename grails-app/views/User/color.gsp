@@ -9,7 +9,7 @@
 <%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
-    <title>Tambah Warna</title>
+    <title>Daftar Warna</title>
 </head>
 
 <body>

@@ -55,24 +55,31 @@
                     <div class="row">
                         <div class="col">
                             <div class="logo-box"><a href="#" class="logo-text" style="color: #2877ed">Polymorphic</a></div>
+                            <g:if test="${userError?.hasErrors()}">
+                                <div class="alert alert-danger">
+                                    <g:eachError bean="${userError}" var="error">
+                                        <li><g:message error="${error}"/></li>
+                                    </g:eachError>
+                                </div>
+                            </g:if>
                             <form action="${createLink(uri: '/user/add')}" method="post">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="user_name" name="name" placeholder="Masukkan Nama">
+                                    <input required type="text" class="form-control" id="user_name" name="name" value="${userError?.name}" placeholder="Masukkan Nama">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="user_username" name="username" placeholder="Masukkan Username">
+                                    <input required type="text" class="form-control" id="user_username" name="username" value="${userError?.username}" placeholder="Masukkan Username">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="user_password" name="password" placeholder="Masukkan Password">
+                                    <input required type="password" class="form-control" id="user_password" name="password" placeholder="Masukkan Password">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="confirm_user_password" name="confirm_password" placeholder="Konfirmasi Password">
+                                    <input required type="password" class="form-control" id="confirm_user_password" name="confirm_password" placeholder="Konfirmasi Password">
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control custom-select" id="user_role" name="role">
                                         <option disabled>--pilih role--</option>
                                         <g:each in="${roles}" var="role">
-                                            <option value="${role.id}">${role.name}</option>
+                                            <option ${roleError == role.id ? 'selected' : ''} value="${role.id}">${role.name}</option>
                                         </g:each>
                                     </select>
                                 </div>

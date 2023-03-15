@@ -10,7 +10,7 @@ class Product {
     static hasMany = [productColors: ProductColor]
 
     static constraints = {
-        code blank: false, nullable: false, unique: true
+        code blank: false, nullable: false, unique: true, ignoreIf: { obj -> obj.id != null }
         name blank: false, nullable: false
         type blank: false, nullable: false
         sleeve blank: false, nullable: false

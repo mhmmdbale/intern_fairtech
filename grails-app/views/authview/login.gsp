@@ -55,14 +55,16 @@
                     <div class="row">
                         <div class="col">
                             <div class="logo-box"><a href="#" class="logo-text" style="color: #2877ed">Polymorphic</a></div>
-                            <g:if test="${flash.message}">
+                            <g:if test="${userError?.hasErrors()}">
                                 <div class="alert alert-danger">
-                                    <li>${flash.message}</li>
+                                    <g:eachError bean="${userError}" var="error">
+                                        <li><g:message error="${error}"/></li>
+                                    </g:eachError>
                                 </div>
                             </g:if>
                             <form action="${createLink(uri: '/authenticate/')}" method="post">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="user_username" name="username" placeholder="Masukkan Username">
+                                    <input type="text" class="form-control" id="user_username" name="username" value="${userError?.username}" placeholder="Masukkan Username">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="user_password" name="password" placeholder="Masukkan Password">

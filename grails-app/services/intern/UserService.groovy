@@ -2,13 +2,9 @@ package intern
 
 import grails.gorm.transactions.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
-import grails.plugin.springsecurity.SpringSecurityService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Transactional
 class UserService {
-
-    SpringSecurityService springSecurityService
 
     def returnUser(User user){
         return [
@@ -27,16 +23,20 @@ class UserService {
         return role
     }
 
-    def addData(GrailsParameterMap params) {
+    def addData(GrailsParameterMap params, User user) {
+        String idRole = params.role
 
-        User user = new User()
         user.name = params.name
         user.username = params.username
-
         user.password = params.password
 
-        user.save(flush: true)
-        UserRole.create(user, Role.findById(params.role))
-        return returnUser(user)
+        user.validate()
+        if (params.password != params.confirm_password) {
+            user.errors.reject('user.password.mismatch', 'Password yang anda masukkan tidak sama.')
+        }
+        if(!user.hasErrors()){
+            user.save(flush: true, failOnError: true)
+            UserRole.create(user, Role.findById(idRole))
+        }
     }
 }

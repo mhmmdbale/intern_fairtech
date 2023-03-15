@@ -9,14 +9,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.nio.file.Files
 import java.nio.file.Paths
-import grails.util.Holders
-import org.springframework.core.io.Resource
 
 @Transactional
 class ProductService {
-
-    def assetResourceLocator
-    def assetProcessorService
     GrailsApplication grailsApplication
     def servletContext
 
@@ -76,55 +71,52 @@ class ProductService {
         return fileName
     }
 
-    void addDataProduct(GrailsParameterMap params, HttpServletRequest request) {
-        // Get the uploaded file from the request
-        MultipartFile imageFile = request.getFile('file')
-
-        Product product = new Product()
+    void addDataProduct(GrailsParameterMap params, Product product, MultipartFile imageFile) {
         product.code = params.code
         product.name = params.name
         product.type = getProductType(params)
         product.sleeve = getProductSleeve(params)
         product.price = params.price.toInteger()
 
-        // Do something with the file
-        if (imageFile?.isEmpty() == false) {
-            String fileName = storeImage(imageFile)
-            product.image = fileName
+        product.validate()
+        if(!product.hasErrors()){
+            // Do something with the file
+            if (!imageFile?.isEmpty()) {
+                String fileName = storeImage(imageFile)
+                product.image = fileName
+            }
+            product.save(flush: true, failOnError: true)
         }
-
-        product.save(flush: true)
     }
 
-    void updateDataProduct(long id, GrailsParameterMap params, HttpServletRequest request){
-        // Get the uploaded file from the request
-        MultipartFile imageFile = request.getFile('file')
-
-        Product product = Product.findById(id)
+    void updateDataProduct(GrailsParameterMap params, Product product, MultipartFile imageFile){
         product.code = params.code
         product.name = params.name
         product.type = getProductType(params)
         product.sleeve = getProductSleeve(params)
         product.price = params.price.toInteger()
 
-        if(product.image){
-            if(params.del_file){
-                deleteImage(product.image)
-                product.image = null
+        product.validate()
+        if(!product.hasErrors()){
+            if(product.image){
+                if(params.del_file){
+                    deleteImage(product.image)
+                    product.image = null
+                    if(imageFile?.isEmpty() == false) {
+                        String fileName = storeImage(imageFile)
+
+                        product.image = fileName
+                    }
+                }
+            }else {
                 if(imageFile?.isEmpty() == false) {
                     String fileName = storeImage(imageFile)
 
                     product.image = fileName
                 }
             }
-        }else {
-            if(imageFile?.isEmpty() == false) {
-                String fileName = storeImage(imageFile)
-
-                product.image = fileName
-            }
+            product.save(flush: true)
         }
-        product.save(flush: true)
     }
 
     void deleteDataProduct(long id){

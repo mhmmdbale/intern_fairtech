@@ -4,7 +4,6 @@ import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
@@ -32,20 +31,6 @@ class User implements Serializable {
         }
         return roles
     }
-
-//    def beforeInsert() {
-//        encodePassword()
-//    }
-//
-//    def beforeUpdate() {
-//        if (isDirty('password')) {
-//            encodePassword()
-//        }
-//    }
-//
-//    protected void encodePassword() {
-//        password = new BCryptPasswordEncoder().encode(password)
-//    }
 
     static transients = ['springSecurityService']
 
