@@ -145,20 +145,21 @@
                         <i class="material-icons">close</i>
                     </button>
                 </div>
-                <form action="${createLink(uri: '/product/addColor')}" method="post">
+                <form>
+%{--                <form action="${createLink(uri: '/product/addColor')}" method="post">--}%
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputCode1">Kode</label>
-                        <input required type="text" class="form-control" id="exampleInputCode1" name="code" placeholder="Masukkan Kode">
+                        <label for="code">Kode</label>
+                        <input required type="text" class="form-control" id="code" name="code" placeholder="Masukkan Kode">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputColor1">Warna</label>
-                        <input required type="text" class="form-control" id="exampleInputColor1" name="name" placeholder="Masukkan Warna">
+                        <label for="name">Warna</label>
+                        <input required type="text" class="form-control" id="name" name="name" placeholder="Masukkan Warna">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" data-url="${createLink(uri: '/product/saveColor')}" class="btn btn-primary saveColor">Simpan</button>
                 </div>
                 </form>
             </div>
@@ -166,4 +167,38 @@
     </div>
 </g:applyLayout>
 </body>
+<script>
+    $(document).ready(function() {
+        $('.saveColor').click(function(e){
+            e.preventDefault();
+            let url = $(this).data('url');
+            let code = $('#code').val();
+            let name = $('#name').val();
+
+            $.ajax({
+                url:url,
+                data:{
+                    code:code,
+                    name:name,
+                },
+                method:'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.errors) {
+                        $.each(data.errors, function (key, value) {
+                            console.log(value)
+                        });
+                    } else {
+                        // display success message
+                        console.log(data.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // handle the error
+                    console.log("Error: " + errorThrown);
+                }
+            });
+        })
+    });
+</script>
 </html>
