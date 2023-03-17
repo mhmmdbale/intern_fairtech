@@ -66,48 +66,18 @@
                                         <td>${color.code}</td>
                                         <td>${color.name}</td>
                                         <td style="vertical-align: middle;text-align: center;">
-                                            <button data-toggle="modal" data-target="#editModal${color.id}" type="button" class="btn mb-1 btn-outline-primary btn-md"><i class="fa fa-edit"></i>
+                                            <button type="button" data-id="${color.id}" data-code="${color.code}" data-name="${color.name}" class="editColor btn mb-1 btn-outline-primary btn-md"><i class="fa fa-edit"></i>
                                             </button>
                                             <button data-toggle="modal" data-target="#deleteModal${color.id}" type="button" class="btn mb-1 btn-outline-danger btn-md"><i class="fa fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- Modal Edit-->
-                                    <div class="modal fade" id="editModal${color.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Ubah Data Warna</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </div>
-                                                <form action="${createLink(uri: '/product/editColor/'+ color.id)}" method="post">
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputCode1">Kode</label>
-                                                            <input required value="${color.code}" type="text" class="form-control" id="exampleInputCode1" name="code" placeholder="Masukkan Kode">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputColor1">Warna</label>
-                                                            <input required value="${color.name}" type="text" class="form-control" id="exampleInputColor1" name="name" placeholder="Masukkan Warna">
-                                                        </div>
-                                                        <input type="hidden" class="form-control" name="id">
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-danger">Ubah Data</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <!-- Modal Delete-->
                                     <div class="modal fade" id="deleteModal${color.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Warna</h5>
+                                                    <h5 class="modal-title">Hapus Warna</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <i class="material-icons">close</i>
                                                     </button>
@@ -146,8 +116,10 @@
                     </button>
                 </div>
                 <form>
-%{--                <form action="${createLink(uri: '/product/addColor')}" method="post">--}%
                 <div class="modal-body">
+                    <div id="error-message" class="alert alert-danger" style="display: none">
+                        <ul></ul>
+                    </div>
                     <div class="form-group">
                         <label for="code">Kode</label>
                         <input required type="text" class="form-control" id="code" name="code" placeholder="Masukkan Kode">
@@ -165,10 +137,49 @@
             </div>
         </div>
     </div>
+    <!-- Modal Edit-->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Data Warna</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                    <form>
+                    <div class="modal-body">
+                        <div id="edit_error-message" class="alert alert-danger" style="display: none">
+                            <ul></ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_code">Kode</label>
+                            <input required value="" type="text" class="form-control" id="edit_code" name="code" placeholder="Masukkan Kode">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_name">Warna</label>
+                            <input required value="" type="text" class="form-control" id="edit_name" name="name" placeholder="Masukkan Warna">
+                        </div>
+                        <input type="hidden" class="form-control" id="edit_id" name="edit_id">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="updateColor btn btn-danger">Ubah Data</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </g:applyLayout>
 </body>
 <script>
     $(document).ready(function() {
+        $(function() {
+            $("input[name='name']").on('input', function(e) {
+                // Convert the value to uppercase
+                this.value = this.value.toUpperCase();
+            });
+        });
         $('.saveColor').click(function(e){
             e.preventDefault();
             let url = $(this).data('url');
@@ -183,19 +194,66 @@
                 },
                 method:'POST',
                 dataType: 'json',
-                success: function(data) {
-                    if (data.errors) {
-                        $.each(data.errors, function (key, value) {
-                            console.log(value)
-                        });
-                    } else {
-                        // display success message
-                        console.log(data.message);
-                    }
+                success: function() {
+                    location.reload();
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    // handle the error
-                    console.log("Error: " + errorThrown);
+                error: function(data) {
+                    let errors = data.responseJSON.errors;
+                    if (errors) {
+                        let $errorDiv = $('#error-message');
+                        let $errorList = $errorDiv.find('ul');
+                        $errorList.empty();
+                        $.each(errors, function(key, value) {
+                            $errorList.append($('<li>').text(value));
+                        });
+                        $errorDiv.show();
+                    }
+                }
+            });
+        })
+        $('.editColor').click(function(e){
+            e.preventDefault();
+            let edit_id = $(this).data('id')
+            let edit_code = $(this).data('code')
+            let edit_name = $(this).data('name')
+
+            $('#editModal').modal('show');
+            document.getElementById("edit_id").value = edit_id;
+            document.getElementById("edit_code").value = edit_code;
+            document.getElementById("edit_name").value = edit_name;
+        })
+        $('.updateColor').click(function(e){
+            e.preventDefault();
+            let update_id = $('#edit_id').val();
+            let update_code = $('#edit_code').val();
+            let update_name = $('#edit_name').val();
+
+            console.log(update_id)
+            console.log(update_code)
+            console.log(update_name)
+
+            $.ajax({
+                url: "${createLink(uri: '/product/updateColor/')}" + update_id,
+                data:{
+                    code:update_code,
+                    name:update_name,
+                },
+                method:'PUT',
+                dataType: 'json',
+                success: function() {
+                    location.reload();
+                },
+                error: function(data) {
+                    let errors = data.responseJSON.errors;
+                    if (errors) {
+                        let $errorDiv = $('#edit_error-message');
+                        let $errorList = $errorDiv.find('ul');
+                        $errorList.empty();
+                        $.each(errors, function(key, value) {
+                            $errorList.append($('<li>').text(value));
+                        });
+                        $errorDiv.show();
+                    }
                 }
             });
         })

@@ -131,21 +131,24 @@ class ProductService {
         }
     }
 
-    void addDataColor(GrailsParameterMap params) {
-
-        Color color = new Color()
+    void addDataColor(GrailsParameterMap params, Color color) {
         color.code = params.code
         color.name = params.name
 
-        color.save(flush: true)
+        color.validate()
+        if(!color.hasErrors()){
+            color.save(flush: true, failOnError: true)
+        }
     }
 
-    void updateDataColor(long id, GrailsParameterMap params){
-        Color color = Color.findById(id)
+    void updateDataColor(GrailsParameterMap params, Color color){
         color.code = params.code
         color.name = params.name
 
-        color.save(flush: true)
+        color.validate()
+        if(!color.hasErrors()){
+            color.save(flush: true, failOnError: true)
+        }
     }
 
     void deleteDataColor(long id){

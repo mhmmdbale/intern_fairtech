@@ -15,7 +15,7 @@
                     </sec:ifLoggedIn>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="auth/logout">Log out</a>
+                    <a class="dropdown-item" href="${createLink(uri: '/auth/logout')}">Log out</a>
                 </div>
             </li>
             <li class="nav-item">

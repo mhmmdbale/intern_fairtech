@@ -19,54 +19,36 @@ class ColorController {
         render(view: "/user/color", model: [colors: colors])
     }
 
-    def saveColor(){
-        def color = new Color(params)
-        color.validate()
+    def saveColor(Color color){
+        productService.addDataColor(params, color)
         if (color.hasErrors()) {
             def errors = color.errors.allErrors.collect { error ->
                 messageSource.getMessage(error, LocaleContextHolder.getLocale())
             }
-            respond([errors: errors], contentType: "application/json")
+            respond([errors: errors], status: 400)
         } else {
-            respond([message: "berhasil"], contentType: "application/json")
+            flash.message = "Data Berhasil di Simpan"
+            respond([:], status: 201)
         }
     }
-
-//    def saveColor(){
-//        def color = new Color(params)
-//        color.validate()
-//        if (color.hasErrors()) {
-//            // Redirect back to the form
-//            List<Color> colors = productService.getAllColor()
-//            render(view: "/user/formColor", model: [colorError : color, colors: colors])
-//            return
-//        }
-//        productService.addDataColor(params)
-//        flash.message = "Data Berhasil di Simpan"
-//
-//        redirect(url: "/product/formColor")
-//    }
 
     def deleteColor(long id){
         productService.deleteDataColor(id)
 
-        redirect(url: "/product/formColor")
+        redirect(action: "index")
     }
 
     def updateColor(long id){
-        Color check = Color.findById(id)
-        if (check.code != params.code){
-            def color = new Color(params)
-            color.validate()
-            if (color.hasErrors()) {
-                // Redirect back to the form
-                List<Color> colors = productService.getAllColor()
-                render(view: "/user/formColor", model: [colorError : color, colors: colors])
-                return
+        Color color = Color.findById(id)
+        productService.updateDataColor(params, color)
+        if (color.hasErrors()) {
+            def errors = color.errors.allErrors.collect { error ->
+                messageSource.getMessage(error, LocaleContextHolder.getLocale())
             }
+            respond([errors: errors], status: 400)
+        }else {
+            flash.message = "Data Berhasil di Ubah"
+            respond([:], status: 200)
         }
-        productService.updateDataColor(id, params)
-        flash.message = "Data Berhasil di Ubah"
-        redirect(url: "/product/formColor")
     }
 }

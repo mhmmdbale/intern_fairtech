@@ -28,7 +28,7 @@ class UrlMappings {
         "/product/color"(controller: "color", action: "index")
         "/product/saveColor"(controller: "color", action: "saveColor")
         "/product/deleteColor/$id"(controller: "color", action: "deleteColor")
-        "/product/editColor/$id"(controller: "color", action: "updateColor")
+        "/product/updateColor/$id"(controller: "color", action: "updateColor")
         "/product/detailColor/$id"(controller: "productColor", action: "index")
     }
 }
