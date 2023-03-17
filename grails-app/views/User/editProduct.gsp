@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputImage1" class="form-label">File</label>
                                     <g:if test="${product.image}">
-                                        <br><asset:image src="products/${product.image}" width="200" height="100"></asset:image>
+                                        <br><asset:image src="products/${product.image}" width="150" height="200"></asset:image>
                                     </g:if>
                                     <input type="hidden" value="${product.image}" id="checkFile">
                                     <div class="custom-control custom-switch" id="switchFile">
@@ -83,39 +83,46 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function initialize() {
-            var i = document.getElementById("switchFile");
-            var j = document.getElementById("exampleInputImage1");
-            var k = document.getElementById("checkFile");
-            if(k.value === ''){
-                i.style.display = "none";
-            }else {
-                j.style.display = "none";
-            }
-        }
-        initialize();
-
-        function del(){
-            event.preventDefault();
-            var d = document.getElementById("exampleInputImage1");
-            if(document.getElementById("switchDelete").checked){
-                d.style.display = "block";
-            }else{
-                d.style.display = "none";
-                d.value = '';
-            }
-            console.log(document.getElementById("switchDelete").value)
-            console.log(document.getElementById("checkFile").value)
-        }
-        function isNumberKey(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
-    </script>
 </g:applyLayout>
 </body>
+<script>
+    function initialize() {
+        let i = document.getElementById("switchFile");
+        let j = document.getElementById("exampleInputImage1");
+        let k = document.getElementById("checkFile");
+        if(k.value === ''){
+            i.style.display = "none";
+        }else {
+            j.style.display = "none";
+        }
+    }
+    initialize();
+
+    function del(){
+        event.preventDefault();
+        let d = document.getElementById("exampleInputImage1");
+        if(document.getElementById("switchDelete").checked){
+            d.style.display = "block";
+        }else{
+            d.style.display = "none";
+            d.value = '';
+        }
+        console.log(document.getElementById("switchDelete").value)
+        console.log(document.getElementById("checkFile").value)
+    }
+
+    function isNumberKey(evt) {
+        let charCode = (evt.which) ? evt.which : evt.keyCode;
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+
+    }
+    $(document).ready(function() {
+        $(function() {
+            $("input[name='name']").on('input', function(e) {
+                // Convert the value to uppercase
+                this.value = this.value.toUpperCase();
+            });
+        });
+    });
+</script>
 </html>

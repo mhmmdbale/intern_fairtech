@@ -76,15 +76,21 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function isNumberKey(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
-    </script>
 </g:applyLayout>
 </body>
+<script>
+    function isNumberKey(evt) {
+        let charCode = (evt.which) ? evt.which : evt.keyCode;
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+
+    }
+    $(document).ready(function() {
+        $(function() {
+            $("input[name='name']").on('input', function(e) {
+                // Convert the value to uppercase
+                this.value = this.value.toUpperCase();
+            });
+        });
+    });
+</script>
 </html>

@@ -99,7 +99,7 @@
                                                 </div>
                                                 <div class="modal-body" style="display: flex; justify-content: center;">
                                                     <g:if test="${product.image}">
-                                                        <asset:image src="products/${product.image}" width="400" height="200"></asset:image>
+                                                        <asset:image src="products/${product.image}" width="250" height="300"></asset:image>
                                                     </g:if>
                                                     <g:else>
                                                         Tidak Ada Gambar.
