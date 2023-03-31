@@ -38,7 +38,7 @@ class ProductController {
     }
 
     def updateProduct(long id){
-        Product product = Product.findById(id)
+        def product = productService.getProductById(id)
         MultipartFile imageFile = request.getFile('file')
         productService.updateDataProduct(params, product, imageFile)
         if (product.hasErrors()) {

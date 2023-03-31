@@ -10,16 +10,9 @@
 <asset:javascript src="template/plugins/bootstrap/popper.min.js" />
 <asset:javascript src="template/plugins/bootstrap/js/bootstrap.min.js" />
 <asset:javascript src="template/plugins/jquery-slimscroll/jquery.slimscroll.min.js" />
-<asset:javascript src="template/plugins/jquery-sparkline/jquery.sparkline.min.js" />
-<asset:javascript src="template/plugins/apexcharts/dist/apexcharts.min.js" />
-<asset:javascript src="template/plugins/blockui/jquery.blockUI.js" />
-<asset:javascript src="template/plugins/flot/jquery.flot.min.js" />
-<asset:javascript src="template/plugins/flot/jquery.flot.time.min.js" />
-<asset:javascript src="template/plugins/flot/jquery.flot.symbol.min.js" />
-<asset:javascript src="template/plugins/flot/jquery.flot.resize.min.js" />
-<asset:javascript src="template/plugins/flot/jquery.flot.tooltip.min.js" />
 <asset:javascript src="template/js/connect.min.js" />
-<asset:javascript src="template/js/pages/dashboard.js" />
+<asset:javascript src="template/plugins/select2/js/select2.full.min.js" />
+<asset:javascript src="template/js/pages/select2.js" />
 
 <asset:javascript src="template/js/pages/datatables.js" />
 <asset:javascript src="template/plugins/DataTables/datatables.min.js" />

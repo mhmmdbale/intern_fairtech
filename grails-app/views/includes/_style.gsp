@@ -19,3 +19,5 @@
 <asset:stylesheet src="template/css/admin3.css" />
 <asset:stylesheet src="template/css/dark_theme.css" />
 <asset:stylesheet src="template/css/custom.css" />
+
+<asset:stylesheet src="template/plugins/select2/css/select2.min.css" />

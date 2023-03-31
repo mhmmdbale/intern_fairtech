@@ -6,7 +6,6 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
     <title>Dashboard</title>

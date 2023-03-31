@@ -6,7 +6,6 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
     <title>Daftar Warna</title>
@@ -213,6 +212,9 @@
         })
         $('.editColor').click(function(e){
             e.preventDefault();
+            let $errorDiv = $('#edit_error-message');
+            $errorDiv.hide();
+
             let edit_id = $(this).data('id')
             let edit_code = $(this).data('code')
             let edit_name = $(this).data('name')

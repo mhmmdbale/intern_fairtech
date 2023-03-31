@@ -6,7 +6,6 @@
 --%>
 
 <%@ page import="intern.Product" contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="g" uri="http://www.grails.org/tags" %>
 <html>
 <head>
     <title>Tambah Produk</title>
